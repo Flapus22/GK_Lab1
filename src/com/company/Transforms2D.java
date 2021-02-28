@@ -41,12 +41,11 @@ public class Transforms2D extends JPanel {
             // Pochylenie bez wykorzystania Metody
             var angle = 45;
             for (int i = 0; i < n; i++) {
-                if(angle>0) {
+                if (angle > 0) {
                     polygon2.xpoints[i] += (polygon2.ypoints[i] / Math.PI) * Math.toRadians(angle);
                     polygon2.ypoints[i] -= (polygon2.ypoints[i] / Math.PI) * Math.toRadians(angle);
                 }
-                if(angle<0)
-                {
+                if (angle < 0) {
                     polygon2.xpoints[i] += (polygon2.ypoints[i] / Math.PI) * Math.toRadians(angle);
                     polygon2.ypoints[i] += (polygon2.ypoints[i] / Math.PI) * Math.toRadians(angle);
                 }
@@ -66,7 +65,7 @@ public class Transforms2D extends JPanel {
                     g2.scale(0.5, -1);
                     break;
                 case 4:
-                    g2.shear(0.5,0);
+                    g2.shear(0.5, 0);// Pochylenie obrazka za pomocą metody
                     break;
                 case 5:
 //                    for (int i = 0; i < sides; i++) {
@@ -77,22 +76,22 @@ public class Transforms2D extends JPanel {
                     break;
                 case 6:
                     g2.rotate(Math.toRadians(90));
-                    g2.shear(0.5,0);
+                    g2.shear(0.5, 0);
                     break;
                 case 7:
                     g2.rotate(Math.toRadians(180));
                     g2.scale(0.5, 1);
                     break;
                 case 8:
-                    g2.translate(0,200);
+                    g2.translate(0, 200);
                     g2.rotate(Math.toRadians(30));
-                    g2.scale(1,0.3);
+                    g2.scale(1, 0.3);
 
                     break;
                 case 9:
-                    g2.translate(120,0);
+                    g2.translate(120, 0);
                     g2.rotate(Math.toRadians(207));
-                    g2.shear(0.5,0);
+                    g2.shear(0.5, 0);
                     break;
                 default:
 

@@ -35,39 +35,40 @@ public class Transforms2D extends JPanel {
                 Y[i] = (int) (Math.sin(((Math.PI / 2) + (2 * Math.PI * i)) / n) * 150);
             }//Stworzenie Wielokąta
 
-            Polygon polygon1 = new Polygon(X, Y, n);// normalny wielokąt
+            Polygon polygon = new Polygon(X, Y, n);// normalny wielokąt
             Polygon polygon2 = new Polygon(X, Y, n);// pochylony wielokąt
 
+            // Pochylenie bez wykorzystania Metody
+            var angle = 45;
             for (int i = 0; i < n; i++) {
-                if (polygon2.ypoints[i] > 50) {
-                    polygon2.xpoints[i] += 100;
+                if(angle>0) {
+                    polygon2.xpoints[i] += (polygon2.ypoints[i] / Math.PI) * Math.toRadians(angle);
+                    polygon2.ypoints[i] -= (polygon2.ypoints[i] / Math.PI) * Math.toRadians(angle);
                 }
-                if (polygon2.ypoints[i] < -50) {
-                    polygon2.xpoints[i] -= 100;
+                if(angle<0)
+                {
+                    polygon2.xpoints[i] += (polygon2.ypoints[i] / Math.PI) * Math.toRadians(angle);
+                    polygon2.ypoints[i] += (polygon2.ypoints[i] / Math.PI) * Math.toRadians(angle);
                 }
-            }//Pochylenie wielokąta
 
-            Polygon wynik = polygon1;//Przypisanie odpowiedniego wielokąta do wyniku który zostanie wyświetlony
+            }//Pochylenie wielokąta o dany Kąt
+
 
             switch (whichTransform) {
                 case 1:
-                    wynik = polygon1;
                     g2.scale(0.3, 0.3);//Zeskalowanie obrazu
                     break;
                 case 2:
-                    wynik = polygon1;
                     g2.rotate(0.785398);// Obrót obrazu. wartość wpisywana w radianach
                     // można wpisać od razu wartość lub wykorzystać metode do tego
                     break;
                 case 3:
-                    wynik = polygon1;
                     g2.scale(0.5, -1);
                     break;
                 case 4:
-                    wynik = polygon2;
+                    g2.shear(0.5,0);
                     break;
                 case 5:
-                    wynik = polygon1;
 //                    for (int i = 0; i < sides; i++) {
 //                        polygon.ypoints[i] -= 850 ;
 //                    } //inny sposób na przesunięcie obiektu
@@ -75,43 +76,40 @@ public class Transforms2D extends JPanel {
                     g2.scale(1, 0.3);
                     break;
                 case 6:
-                    wynik = polygon2;
                     g2.rotate(Math.toRadians(90));
+                    g2.shear(0.5,0);
                     break;
                 case 7:
-                    wynik = polygon1;
                     g2.rotate(Math.toRadians(180));
                     g2.scale(0.5, 1);
                     break;
                 case 8:
-                    wynik = polygon1;
                     g2.translate(0,200);
                     g2.rotate(Math.toRadians(30));
                     g2.scale(1,0.3);
 
                     break;
                 case 9:
-                    g2.translate(75,0);
-                    g2.rotate(Math.toRadians(180));
-                    wynik = polygon2;
-
+                    g2.translate(120,0);
+                    g2.rotate(Math.toRadians(207));
+                    g2.shear(0.5,0);
                     break;
                 default:
 
                     break;
             }// W zależności od wybranego indeksu będą różne modyfikacje wielokąta
 
-            g2.setPaint(new GradientPaint(new Point(wynik.xpoints[0], wynik.ypoints[0]), new Color(180, 66, 14),
-                    new Point(wynik.xpoints[n / 2], wynik.ypoints[n / 2]), new Color(90, 206, 56)));
+            g2.setPaint(new GradientPaint(new Point(polygon.xpoints[0], polygon.ypoints[0]), new Color(180, 66, 14),
+                    new Point(polygon.xpoints[n / 2], polygon.ypoints[n / 2]), new Color(90, 206, 56)));
             //zmiana koloru dla wielokąta
 
-            g2.fillPolygon(wynik);// narysowanie pełnego wielokąta
+            g2.fillPolygon(polygon);// narysowanie pełnego wielokąta
             g2.setPaint(Color.black);// Zmiana koloru obrysu wielokąta
-            g2.drawPolygon(wynik);// Narysowanie obrysu wielokąta
+            g2.drawPolygon(polygon);// Narysowanie obrysu wielokąta
 
 
             // TODO Apply transforms here, depending on the value of whichTransform!
-//            g2.drawImage(pic, -200, -150, null); // Draw image with center at (0,0).
+            //g2.drawImage(pic, -200, -150, null); // Draw image with center at (0,0).
         }
     }
 

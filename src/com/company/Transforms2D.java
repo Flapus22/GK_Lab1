@@ -31,8 +31,8 @@ public class Transforms2D extends JPanel {
 
 
             for (int i = 0; i < n; i++) {
-                X[i] = (int) (Math.cos(((Math.PI / 2) + (2 * Math.PI * i)) / n) * 150);
-                Y[i] = (int) (Math.sin(((Math.PI / 2) + (2 * Math.PI * i)) / n) * 150);
+                X[i] = (int) (Math.cos(((Math.PI / 2) + (2 * Math.PI * i)) / n) * 30);
+                Y[i] = (int) (Math.sin(((Math.PI / 2) + (2 * Math.PI * i)) / n) * 30);
             }//Stworzenie Wielokąta
 
             Polygon polygon = new Polygon(X, Y, n);// normalny wielokąt
